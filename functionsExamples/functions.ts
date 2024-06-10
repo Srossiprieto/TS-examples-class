@@ -148,11 +148,11 @@ avengers.forEach((avenger) => {
 
 
 
-// 📌 Optional properties
+// 📌 Optional properties  // VALIDACIÓNES QUE NO ESTAN EN LA EJECUCIÓN
 
 // Pascalcase
 // Template Union Types
-type HeroId = `${string}-${string}-${string}-${string}-${string}`;
+/* type HeroId = `${string}-${string}-${string}-${string}-${string}`;
 
 
 
@@ -189,4 +189,243 @@ const thor = Object.freeze(createHero({name: 'thor',age: 30})); // Object.freeze
 console.log(thor.isactive); // --> true
 
 // thor.id = 4234423432423324324; // ❌ no se puede modificar porque es readonly.
+ */
 
+// 📌 Template union Types
+
+/* type HexadecimalColor = `#${string}` 
+
+
+const color: HexadecimalColor = '0033ff' // hexadecimales --> ❌ ya que te informa que el formato contiene # evitando errores. 
+const color2 = '#0033ff' // hexadecimales  --> ✅ ya que respeta el formato. */
+
+
+// 📌 UNION TYPES
+
+/* 
+
+type HeroId = `${string}-${string}-${string}-${string}-${string}`;
+type HeroPowerScale = 'local' | 'global' | 'cosmic' | 'universal' | 'multiversal';
+
+// const enableAnimationDuration: number | boolean = 200; // 200ms 
+
+
+
+    // let ejemplo: number | string | 3 | 'santino' // ✅
+    // ejemplo = 4; // ✅
+
+type Hero = {
+  readonly id?: HeroId, // readonly --> no se puede modificar, solo de lectura. ✅ evitando mutabilidad. 
+  name: string,
+  age: number,
+  isactive?: boolean, // ? --> es opcional
+  powerScale?: HeroPowerScale | undefined;
+}
+
+let hero: Hero = {
+  name: 'Thor',
+  age: 30,
+}
+// hero.power = 'Mjolnir'; // ❌ no se puede agregar una propiedad que no esta definida en el objeto.
+function createHero(hero: Hero): Hero{
+  const {name, age} = hero;
+  return {
+    // id: '1234', // ❌ no sigue el formato de HeroId. 
+    id: crypto.randomUUID(), // ✅
+    name,
+    age,
+    isactive: true,
+  }
+}
+
+const thor = createHero({name: 'thor',age: 30}); 
+
+thor.powerScale = 'cosmic'
+console.log(thor);
+  */
+
+
+// 📌 Intersection Types. 
+
+
+/* 
+type HeroId = `${string}-${string}-${string}-${string}-${string}`;
+type HeroPowerScale = 'local' | 'global' | 'cosmic' | 'universal' | 'multiversal';
+
+type HeroBasicInfo = { 
+  name: string,
+  age: number,
+}
+
+
+
+type HeroProporties = {
+  readonly id?: HeroId, 
+  isactive?: boolean, 
+  powerScale?: HeroPowerScale | undefined;
+}
+
+
+// nuevo tipo que tiene que tener estos 2.
+type Hero = HeroBasicInfo & HeroProporties;
+
+
+
+
+let hero: Hero = {
+  name: 'Thor',
+  age: 30,
+}
+function createHero(input: Hero): Hero{
+  const {name, age} = input;
+  return {
+
+    id: crypto.randomUUID(), // ✅
+    name,
+    age,
+    isactive: true,
+  }
+}
+
+const thor = createHero({name: 'thor',age: 30}); 
+
+thor.powerScale = 'cosmic'
+console.log(thor);
+
+ */
+
+
+// 📌 Type index
+/* 
+type HeroProporties = { 
+  isActive: boolean;
+  address: {
+    planet: string,
+    city: string
+  }
+}
+
+// accedemos a adress, reutilizar partes de algun tipo que tengamos 
+const adressHero: HeroProporties['address'] = {
+  planet: 'Earth',
+  city: 'Buenos Aires'
+}
+
+ */
+ 
+//Type from value
+
+/* const address =  {
+  planet: 'Earth',
+  city: 'Buenos Aires'
+}
+
+type Address = typeof address // mismo objeto ⬇️
+
+const addressTwitch: Address = { 
+  planet: 'mars', 
+  city: 'twitch'
+} */
+
+// Type from function return 
+
+/* function createAdress() {
+  return   {
+    planet: 'Earth',
+    city: 'Buenos Aires'
+  }
+}
+
+ // recuperamos type y guardamos en Adress
+type Adress = ReturnType<typeof createAdress>  */
+
+// 🌐 Type from function return 
+/* 
+function createAdress() {
+  return   {
+    planet: 'Earth',
+    city: 'Buenos Aires'
+  }
+}
+ // extraer tipos de cualquier funcion 
+
+type Address = ReturnType<typeof createAdress> // ReturnType --> recuperame el tipo que tiene la funcion createAdress y guardalo en Adress.
+
+ */
+
+
+// 📌 Arrays
+// const languajes: Array<string>= []
+// ✅ me parece mas simple usar este... ⬇️
+// const languajes: string[] = []
+
+                // entre parentesis si queres 2
+/* const languajes:(number | string)[] = []
+
+languajes.push('JavaScript')
+languajes.push(1)
+
+console.log(languajes);
+
+ */
+
+
+
+// ARRAY INFO SAVE
+/* 
+type HeroId = `${string}-${string}-${string}-${string}-${string}`;
+type HeroPowerScale = 'local' | 'global' | 'cosmic' | 'universal' | 'multiversal';
+
+
+type HeroBasicInfo = {
+
+  name: string,
+  age: number,
+
+}
+
+const herosWithBasicInfo: HeroBasicInfo[]= []; */
+
+
+// ✅📌 MATRICES Y TUPLAS
+
+/*
+
+['X', 'O', 'X'], // <-- string[]
+['O', 'X', 'O'], // <-- string[]
+['O', 'O', 'X'], // <-- string[]
+ 
+*/
+
+// 
+type CellValue = 'X' | 'O' | '';
+// tupla --> array con limite fijado de longitud.
+type GameBoard = [
+  [CellValue, CellValue, CellValue],
+  [CellValue, CellValue, CellValue],
+  [CellValue, CellValue, CellValue]
+]
+
+const gameBoard: GameBoard = [
+  ['X', 'O', 'X'], 
+  ['O', 'X', 'O'], 
+  ['O', 'O', 'X'],
+]
+
+
+
+// esto es una tupla de react, siempre devuelve 2 funciones 
+//EJEMPLO DE TUPLA ⬇️
+/* type State = [string, (newName:string) => void]
+const [hero, setHero]:State = useState('thor')
+ */
+
+//EJEMPLO 2 DE TUPLA ⬇️
+/* 
+type RGB = [number, number, number]
+
+const rgb: RGB= [255, 255, 0] // 0 - 255
+
+const rgb2: RGB = [1, 2, 3, 4, 'f'] //❌ esta mal ya que no utiliza el type que predifinimos para el RGB [number, number, number] 
+
+*/
