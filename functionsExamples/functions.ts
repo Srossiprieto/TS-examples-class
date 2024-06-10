@@ -429,3 +429,4 @@ const rgb: RGB= [255, 255, 0] // 0 - 255
 const rgb2: RGB = [1, 2, 3, 4, 'f'] //❌ esta mal ya que no utiliza el type que predifinimos para el RGB [number, number, number] 
 
 */
+
