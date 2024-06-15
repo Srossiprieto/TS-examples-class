@@ -1,4 +1,4 @@
-# 🚀 Curso - Clase de TypeScript
+# 🚀 Curso - Clase de TypeScript - midu ejemplos
 
 
 ### 📌 Temario: 
