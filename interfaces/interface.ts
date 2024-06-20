@@ -71,7 +71,7 @@ const carrito: CarritoDeCompras = {
 
 /* 
     - Definir objetos o un metodo de objeto o la forma de una clase = interface --> beneficio fusión de declaraciones
-    - Types para todo lo demás:
+    - Types para todo lo demás:n 
         -Alias de tipos primitivos.
         -Tuplas.
         -Uniones.
